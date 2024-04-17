@@ -1,39 +1,54 @@
+
 import java.text.DecimalFormat;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        DecimalFormat dc = new DecimalFormat("#####0.00");
+        double a,b,c,delta;
 
-        int a,b,c,maiornumero;
+        System.out.println("informe a");
+        a =sc.nextInt();
+        System.out.println("informe b");
+        b =sc.nextInt();
+        System.out.println("informe c");
+        c =sc.nextInt();
 
-        System.out.println("informe o primeiro numero");
-        a = sc.nextInt();
+        delta = calculedelta(a,b,c);
 
-        System.out.println("informe o segundo  numero");
-        b = sc.nextInt();
+        verifiquedelta(delta,a,b);
 
-        System.out.println("informe o terceiro numero");
-        c = sc.nextInt();
 
-        maiornumero = verificaMaiorNumero(a,b,c);
-        showPrint(maiornumero);
         sc.close();
 
     }
-    public static int verificaMaiorNumero(int a, int b,int c){
-        int aux;
-        if ((a >b) && (a>c)) {
-            aux = a;
-        }else if ((b >a) &&(b > c)) {
-            aux = b;
-        }else {
-            aux =c;
-        }
-        return aux;
+    public static double calculedelta(double a,double b,double c) {
+      return Math.pow(b,2)-(4*a*c);
+
     }
-  public static void showPrint(int num){
-      System.out.println("o maioir numero é" + num);
-  }
+    public static void verifiquedelta(double delta,double a,double b){
+        DecimalFormat dc =new DecimalFormat("#####0.00");
+        double x1,x2;
+        if (delta>=0) {
+            x1 = calculeRaiz1(delta,a,b);
+            x2 =calculeRaiz2(delta,a,b);
+            imprimir("raiz x1 ["+  dc.format(x1) + "]");
+            imprimir("raiz x2 ["+ dc.format(x2) + "]");
+        }
+
+        else {
+            imprimir("nao existe raizes reais");
+        }
+    }
+    public static double calculeRaiz1(double delta,double a, double b){
+        return  (-b + Math.sqrt(delta))/(2 * a);
+    }
+    public static double calculeRaiz2(double delta, double a,double b){
+        return (-b - Math.sqrt(delta))/(2 * a);
+    }
+    public static void imprimir (String msg){
+        System.out.println(msg);
+    }
 }
+
+
